@@ -1,0 +1,249 @@
+{
+  "conversion": {
+    "output_size_mb": 10.3310546875,
+    "success": true
+  },
+  "analysis": {
+    "total_nodes": 262,
+    "total_parameters": 2691221.0,
+    "parameter_memory_mb": 10.266193389892578,
+    "input_shape": [
+      1,
+      3,
+      640,
+      640
+    ],
+    "output_shape": [
+      1,
+      84,
+      8400
+    ],
+    "operation_counts": {
+      "Conv": 76,
+      "Sigmoid": 70,
+      "Mul": 70,
+      "Add": 9,
+      "Concat": 19,
+      "MaxPool": 3,
+      "Resize": 2,
+      "Reshape": 5,
+      "Split": 1,
+      "Transpose": 1,
+      "Softmax": 1,
+      "Slice": 2,
+      "Sub": 2,
+      "Div": 1
+    },
+    "top_operations": {
+      "Conv": 76,
+      "Sigmoid": 70,
+      "Mul": 70,
+      "Concat": 19,
+      "Add": 9
+    },
+    "fusion_opportunities": 0
+  },
+  "quantization": {
+    "original_size_mb": 10.3310546875,
+    "quantized_size_mb": 2.8715715408325195,
+    "compression_ratio": 3.597700611179913,
+    "success": true
+  },
+  "performance": {
+    "fp32": {
+      "mean_ms": 4.028092079679482,
+      "std_ms": 0.459665657132943,
+      "min_ms": 3.465041983872652,
+      "max_ms": 5.854249990079552,
+      "p50_ms": 3.874624992022291,
+      "p95_ms": 4.912972921738401,
+      "p99_ms": 5.682939442922362,
+      "fps": 248.2564897274073,
+      "cv": 0.1141149824880664,
+      "iqr": 0.3979067550972104,
+      "outliers": 5
+    },
+    "int8": {
+      "mean_ms": 148.2903617451666,
+      "std_ms": 2.82505059244975,
+      "min_ms": 142.82841701060534,
+      "max_ms": 159.63854198344052,
+      "p50_ms": 147.99733349354938,
+      "p95_ms": 152.42793125798926,
+      "p99_ms": 159.2643635632703,
+      "fps": 6.7435266070661815,
+      "cv": 0.01905080383649297,
+      "iqr": 2.4298757198266685,
+      "outliers": 4
+    },
+    "comprehensive": {
+      "model.onnx": {
+        "constrained": {
+          "description": "Single-thread execution for controlled comparison",
+          "settings": {
+            "use_cuda": false,
+            "use_coreml": false,
+            "for_benchmarking": true,
+            "intra_op_num_threads": 1,
+            "inter_op_num_threads": 1
+          },
+          "timings": {
+            "mean_ms": 4.028092079679482,
+            "std_ms": 0.459665657132943,
+            "min_ms": 3.465041983872652,
+            "max_ms": 5.854249990079552,
+            "p50_ms": 3.874624992022291,
+            "p95_ms": 4.912972921738401,
+            "p99_ms": 5.682939442922362,
+            "fps": 248.2564897274073,
+            "cv": 0.1141149824880664,
+            "iqr": 0.3979067550972104,
+            "outliers": 5
+          },
+          "providers": [
+            "CoreMLExecutionProvider",
+            "CPUExecutionProvider"
+          ]
+        },
+        "practical": {
+          "description": "Auto-threading as in real deployment",
+          "settings": {
+            "use_cuda": false,
+            "use_coreml": false,
+            "for_benchmarking": false,
+            "intra_op_num_threads": null,
+            "inter_op_num_threads": null
+          },
+          "timings": {
+            "mean_ms": 5.82850581035018,
+            "std_ms": 0.7376668431195994,
+            "min_ms": 4.109499976038933,
+            "max_ms": 8.104458975140005,
+            "p50_ms": 5.78152050729841,
+            "p95_ms": 6.930958028533496,
+            "p99_ms": 7.343932072399188,
+            "fps": 171.57055899716423,
+            "cv": 0.1265619126277031,
+            "iqr": 0.7086247205734253,
+            "outliers": 8
+          },
+          "providers": [
+            "CoreMLExecutionProvider",
+            "CPUExecutionProvider"
+          ]
+        },
+        "apple_optimized": {
+          "description": "Apple Silicon with CoreML (when applicable)",
+          "settings": {
+            "use_cuda": false,
+            "use_coreml": true,
+            "for_benchmarking": false,
+            "intra_op_num_threads": null,
+            "inter_op_num_threads": null
+          },
+          "timings": {
+            "mean_ms": 5.48696830519475,
+            "std_ms": 0.675682034564264,
+            "min_ms": 3.9613329572603106,
+            "max_ms": 7.072624983265996,
+            "p50_ms": 5.6777080171741545,
+            "p95_ms": 6.425772950751707,
+            "p99_ms": 6.768282144330444,
+            "fps": 182.25000480743742,
+            "cv": 0.12314305404763622,
+            "iqr": 0.4306362825445831,
+            "outliers": 9
+          },
+          "providers": [
+            "CoreMLExecutionProvider",
+            "CPUExecutionProvider"
+          ]
+        }
+      },
+      "model_int8.onnx": {
+        "constrained": {
+          "description": "Single-thread execution for controlled comparison",
+          "settings": {
+            "use_cuda": false,
+            "use_coreml": false,
+            "for_benchmarking": true,
+            "intra_op_num_threads": 1,
+            "inter_op_num_threads": 1
+          },
+          "timings": {
+            "mean_ms": 148.2903617451666,
+            "std_ms": 2.82505059244975,
+            "min_ms": 142.82841701060534,
+            "max_ms": 159.63854198344052,
+            "p50_ms": 147.99733349354938,
+            "p95_ms": 152.42793125798926,
+            "p99_ms": 159.2643635632703,
+            "fps": 6.7435266070661815,
+            "cv": 0.01905080383649297,
+            "iqr": 2.4298757198266685,
+            "outliers": 4
+          },
+          "providers": [
+            "CoreMLExecutionProvider",
+            "CPUExecutionProvider"
+          ]
+        },
+        "practical": {
+          "description": "Auto-threading as in real deployment",
+          "settings": {
+            "use_cuda": false,
+            "use_coreml": false,
+            "for_benchmarking": false,
+            "intra_op_num_threads": null,
+            "inter_op_num_threads": null
+          },
+          "timings": {
+            "mean_ms": 63.923276730347425,
+            "std_ms": 3.0711677962402484,
+            "min_ms": 58.84200002765283,
+            "max_ms": 83.73591600684449,
+            "p50_ms": 63.425104483030736,
+            "p95_ms": 67.72264559403993,
+            "p99_ms": 74.67279662669175,
+            "fps": 15.643753749019758,
+            "cv": 0.048044592726302134,
+            "iqr": 2.420114746200852,
+            "outliers": 3
+          },
+          "providers": [
+            "CoreMLExecutionProvider",
+            "CPUExecutionProvider"
+          ]
+        },
+        "apple_optimized": {
+          "description": "Apple Silicon with CoreML (when applicable)",
+          "settings": {
+            "use_cuda": false,
+            "use_coreml": true,
+            "for_benchmarking": false,
+            "intra_op_num_threads": null,
+            "inter_op_num_threads": null
+          },
+          "timings": {
+            "mean_ms": 70.64202004985418,
+            "std_ms": 10.193799376687497,
+            "min_ms": 60.34312502015382,
+            "max_ms": 133.61183396773413,
+            "p50_ms": 66.80818798486143,
+            "p95_ms": 88.17791726614813,
+            "p99_ms": 100.28587583743519,
+            "fps": 14.155880583458261,
+            "cv": 0.14430220666811946,
+            "iqr": 6.9754174910485744,
+            "outliers": 5
+          },
+          "providers": [
+            "CoreMLExecutionProvider",
+            "CPUExecutionProvider"
+          ]
+        }
+      }
+    },
+    "speedup": 0.027163546115031134
+  }
+}

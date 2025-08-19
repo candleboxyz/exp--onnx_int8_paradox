@@ -1,0 +1,47 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Models (too large)
+*.pt
+models/*.pth
+models/*.onnx
+
+# Keep only optimized models
+!models/*_int8.onnx
+!models/*_optimized.onnx
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Results
+results/temp/
+results/*.mp4
+results/*.avi
+
+# Profiling
+*.prof
+profile_stats
+
+# Documentation build
+docs/_build/
+
+# custom
+src/for_practice/
+scripts/
+notebooks/**
