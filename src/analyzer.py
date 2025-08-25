@@ -26,6 +26,8 @@ class ModelAnalyzer:
 
         # Count operations
         op_counts = defaultdict(int)
+        # ↳ use defaultdict(int) to simplify operator counting:
+        #   unseen ops default to 0, avoiding manual existence checks
         for node in model.graph.node:
             op_counts[node.op_type] += 1
 
@@ -33,7 +35,7 @@ class ModelAnalyzer:
         total_params = 0
         param_memory = 0
         for tensor in model.graph.initializer:
-            shape = [dim for dim in tensor.dims]
+            shape = list(tensor.dims)
             params = np.prod(shape)
             total_params += params
             # Assume FP32 unless specified
@@ -41,25 +43,22 @@ class ModelAnalyzer:
 
         # Get I/O shapes
         input_shape = [
-            dim.dim_value
-            for dim in model.graph.input[0].type.tensor_type.shape.dim
+            dim.dim_value for dim in model.graph.input[0].type.tensor_type.shape.dim
         ]
         output_shape = [
-            dim.dim_value
-            for dim in model.graph.output[0].type.tensor_type.shape.dim
+            dim.dim_value for dim in model.graph.output[0].type.tensor_type.shape.dim
         ]
 
-        # Find fusion opportunities
-        fusion_opportunities = 0
-        for i, node in enumerate(model.graph.node):
-            if node.op_type == "Conv":
-                # Check if followed by BatchNorm and ReLU
-                if i + 1 < len(model.graph.node):
-                    if model.graph.node[i + 1].op_type in [
-                        "BatchNormalization",
-                        "Relu",
-                    ]:
-                        fusion_opportunities += 1
+        fusion_opportunities = sum(
+            node.op_type == "Conv"
+            and i + 1 < len(model.graph.node)
+            and model.graph.node[i + 1].op_type
+            in [
+                "BatchNormalization",
+                "Relu",
+            ]
+            for i, node in enumerate(model.graph.node)
+        )
 
         return {
             "total_nodes": len(model.graph.node),
@@ -83,15 +82,15 @@ class ModelAnalyzer:
 
         # Get model metadata
         inputs = []
-        for inp in session.get_inputs():
-            inputs.append(
-                {"name": inp.name, "shape": inp.shape, "type": inp.type}
-            )
+        inputs.extend(
+            {"name": inp.name, "shape": inp.shape, "type": inp.type}
+            for inp in session.get_inputs()
+        )
 
         outputs = []
-        for out in session.get_outputs():
-            outputs.append(
-                {"name": out.name, "shape": out.shape, "type": out.type}
-            )
+        outputs.extend(
+            {"name": out.name, "shape": out.shape, "type": out.type}
+            for out in session.get_outputs()
+        )
 
         return {"inputs": inputs, "outputs": outputs}

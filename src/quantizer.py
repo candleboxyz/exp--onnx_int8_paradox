@@ -23,13 +23,23 @@ class ModelQuantizer:
         Apply dynamic quantization to ONNX model.
 
         Returns:
-            Dictionary with quantization statistics
+            Dictionary with quantization statistics.
+            Keys:
+                - original_size_mb (float)
+                - quantized_size_mb (float, optional)
+                - compression_ratio (float, optional)
+                - success (bool)
+                - error (str, optional)
         """
-        stats = {}
 
-        # Get original size
         original_size = os.path.getsize(input_model) / (1024 * 1024)
-        stats["original_size_mb"] = original_size
+        stats = {
+            "original_size_mb": original_size,
+            "quantized_size_mb": None,
+            "compression_ratio": None,
+            "success": False,
+            "error": None,
+        }
 
         try:
             # Perform quantization

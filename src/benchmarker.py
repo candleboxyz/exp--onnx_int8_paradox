@@ -134,7 +134,7 @@ class Benchmarker:
         Returns:
             Dictionary with timing statistics
         """
-        
+
         # Use constrained scenario as default for scientific reproducibility
         session = build_session(
             model_path,
@@ -197,10 +197,8 @@ class Benchmarker:
         # - None (unknown) -> 1
         # - Positive ints remain unchanged
         input_shape = tuple(
-            [
-                1 if (isinstance(dim, str) or dim in (-1, None)) else dim
-                for dim in raw_shape
-            ]
+            1 if (isinstance(dim, str) or dim in (-1, None)) else dim
+            for dim in raw_shape
         )
 
         # Create dummy input with random data

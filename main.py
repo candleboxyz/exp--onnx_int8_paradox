@@ -30,14 +30,12 @@ def run_complete_pipeline(
     output_dir = Path(output_dir)
     output_dir.mkdir(exist_ok=True)
 
-    results = {}
-
     # Step 1: Convert to ONNX
     logger.info("Step 1: Converting to ONNX...")
     converter = ModelConverter()
     onnx_path = output_dir / "model.onnx"
     conversion_stats = converter.pytorch_to_onnx(model_path, str(onnx_path))
-    results["conversion"] = conversion_stats
+    results = {"conversion": conversion_stats}
 
     # Step 2: Analyze model
     logger.info("Step 2: Analyzing model structure...")
